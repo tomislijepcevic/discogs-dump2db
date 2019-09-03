@@ -1,0 +1,49 @@
+import com.github.spotbugs.SpotBugsTask
+
+plugins {
+    id 'application'
+    id 'com.diffplug.gradle.spotless' version '3.24.0'
+    id 'com.github.spotbugs' version '2.0.0'
+    id 'idea'
+}
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+tasks.withType(SpotBugsTask) {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+spotless {
+    java {
+        googleJavaFormat('1.7')
+    }
+}
+
+idea {
+    module {
+        outputDir file('build/classes/main')
+        testOutputDir file('build/classes/test')
+    }
+}
+
+ext {
+    lombokVersion = '1.18.8'
+}
+
+dependencies {
+    // lombok
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    compile 'tslic.discogs:discogs-dump-reader:1.0'
+    compile 'tslic.discogs:discogs-jooq:1.0'
+    compile 'org.postgresql:postgresql:42.2.6'
+}
+
+mainClassName = 'tslic.discogs.Main'
