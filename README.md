@@ -14,3 +14,5 @@ export DB_URL='jdbc:postgresql://localhost:5432/discogs'; \
 Clone https://github.com/tslic/discogs-dump-reader and https://github.com/tslic/discogs-jooq.
 
 Publish both to local maven repo:  `./gradlew publishToMavenLocal`
+
+Create a database schema in a PostgreSQL using this file https://github.com/tslic/discogs-jooq/blob/master/schema.sql.
